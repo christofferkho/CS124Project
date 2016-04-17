@@ -14,11 +14,10 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-//NetUtil class
-//this is a Facade that handles all http requests.
+
 public class NetUtil {
 
-	//use this to pass JSONs to a URL
+
 	public static String postJsonDataToUrl(String url, String json) throws Exception
 	{
 		DefaultHttpClient httpClient = new DefaultHttpClient();
@@ -55,7 +54,6 @@ public class NetUtil {
 		}
 	}
 	
-	//Post to a URL
 	public static String postToUrl(String url) throws Exception
 	{
 		DefaultHttpClient httpClient = new DefaultHttpClient();
@@ -90,7 +88,6 @@ public class NetUtil {
 		}
 	}
 	
-	//reads the return of an HTTP request and returns a string
 	public static String readUrlContentAsString(String url) throws Exception
 	{
 		DefaultHttpClient httpClient = new DefaultHttpClient();
@@ -127,8 +124,6 @@ public class NetUtil {
 		}		
 	}
 	
-	//this is a specific httpPost method to bypass ateneo's proxy to use the Chikka API.
-	//this should work even if not in ateneo, you just need to use your own chikka API account.
 	public static String postToUrlChikka(String url, String body) throws Exception
 	{
 		HttpHost proxy = new HttpHost("proxy.admu.edu.ph", 3128);

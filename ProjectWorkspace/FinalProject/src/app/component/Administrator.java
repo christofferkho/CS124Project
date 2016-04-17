@@ -28,14 +28,8 @@ import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
-//@Component classes will be compiled and run automatically if they are autowired
 @Component
 public class Administrator 
-//the methods here currently have no way of rollbackign information in case of a database error.
-//as such, the Administrator will be overhauled to have a superclass Command.
-//all methods inside this current administrator will be concrete classes of the superclass Command.
-
 {
 	final String clientId = "53ca85c8624935b3a7b03e574d4131aa3757f00d215666fa2f1b44dc79b4029b";
 	final String secretKey = "876677ebc689e3825ce206e5fb05df03b88d1883b0cad7a63a951d5d5375579a";

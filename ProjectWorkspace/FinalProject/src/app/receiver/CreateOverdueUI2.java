@@ -18,9 +18,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  *
  * @author 
  */
-//@Component classes will be compiled and run automatically if they are autowired
 @Component
-public class CreateOverdueUI2 extends javax.swing.JFrame {
+public class CreateOverdueUI2 extends MainUI {
 
     /**
      * Creates new form CreateOverdueUI
@@ -137,7 +136,10 @@ public class CreateOverdueUI2 extends javax.swing.JFrame {
 				out.setText("Please fill up all fields.");
 			}
 			else{
-				map = doCommand("/createOverdueFee", idNo, amount, type, 1);
+				/*(String action, String idNo, String firstName, String lastName,
+				String phone, String terminal, String location, 
+				String timeIn, String amount, String type, String feePk, int state)*/
+				map = doCommand("/createOverdueFee", idNo, "", "", "", "", "", "", amount, type, "", 1);
 				String outputText = (String) map.get("message");
 				out.setText(outputText);
 				//out.setText(outputText);
@@ -168,20 +170,20 @@ public class CreateOverdueUI2 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CreateOverdueUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CreateOverdueUI2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CreateOverdueUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CreateOverdueUI2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CreateOverdueUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CreateOverdueUI2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CreateOverdueUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CreateOverdueUI2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CreateOverdueUI().setVisible(true);
+                new CreateOverdueUI2().setVisible(true);
             }
         });
     }
@@ -200,60 +202,4 @@ public class CreateOverdueUI2 extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     
 //----------NETBEANS CODEENDS HERE------------
-    
-    private static HashMap doCommand(String action, String idNo, String amount, String type, int state) throws Exception
-	{
-		String url1 = "http://localhost:8080/"+action;
-		
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		
-		switch (state){
-		case 1 :
-			map.put(URLHandler.IDNO, idNo);
-			map.put(URLHandler.AMOUNT, amount);
-			map.put(URLHandler.TYPE, type);
-			break;
-		}
-		
-		
-		// CONVERT JAVA DATA TO JSON
-		ObjectMapper mapper = new ObjectMapper();
-		String json1 = mapper.writeValueAsString(map);
-		
-		
-		// SEND TO SERVICE
-		String reply = NetUtil.postJsonDataToUrl(url1, json1);
-		
-		try
-		{
-			// CONVERT REPLY JSON STRING TO A JAVA OBJECT 
-			HashMap replyMap = (HashMap) mapper.readValue(reply, HashMap.class);
-			return replyMap;	
-		}
-		catch(Exception e)
-		{
-			//System.out.println(reply);
-			HashMap replyMap = new HashMap();
-			replyMap.put("message", reply);
-			return replyMap;	
-			
-		}
-	}
-    
-    @PostConstruct
-	public void tada()
-	{
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                setVisible(true);
-            }
-        });
-	}
-	
-	@Override
-	@Value("${app.name}")
-	public void setTitle(String s)
-	{
-		super.setTitle(s);
-	}
 }

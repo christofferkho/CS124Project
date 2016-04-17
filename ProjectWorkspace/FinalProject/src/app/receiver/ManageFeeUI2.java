@@ -30,26 +30,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  *
  * @author Francisco
  */
-//@Component classes will be compiled and run automatically if they are autowired
 @Component
-public class ManageFeeUI2 extends javax.swing.JDialog {
-	//this class currently has 2 methods to pull information from the server.
-	//refreshStudentList and refreshStudentFeeList.
-	//these will need to be overhauled to implement the Observer Pattern here.
-	//we want the students and fees to be updated in real time rather than through
-	//button clicks or other events.
-	
-	//all UI's implement a doCommand, tada(this displays the UI) and setTitle method.
-	//To implement the strategy pattern, all these will be placed in a superclass UI, 
-	//and all current UIs will implement this superclass.
+public class ManageFeeUI2 extends MainUI {
+
     /**
      * Creates new form ManageFeeUI
      */
-    public ManageFeeUI2(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-        initComponents();
-    }
-    
     public ManageFeeUI2() {
         initComponents();
     }
@@ -327,7 +313,10 @@ public class ManageFeeUI2 extends javax.swing.JDialog {
     	String idString = listStudent.getSelectedValue().toString();
     	//int id = Integer.parseInt(idString);
     	try {
-			map = doCommand("/dropAllOverdueFees", idString, "", 1);
+    		/*(String action, String idNo, String firstName, String lastName,
+			String phone, String terminal, String location, 
+			String timeIn, String amount, String type, String feePk, int state)*/
+			map = doCommand("/dropAllOverdueFees", idString, "", "", "", "", "", "", "", "", "",  1);
 			String outputText = (String) map.get("message");
 			refreshStudentList();
 			listFee.setModel(new DefaultListModel());
@@ -345,7 +334,10 @@ public class ManageFeeUI2 extends javax.swing.JDialog {
     	String idString = listStudent.getSelectedValue().toString();
     	//int id = Integer.parseInt(idString);
     	try {
-			map = doCommand("/messageStudent", idString, "", 1);
+    		/*(String action, String idNo, String firstName, String lastName,
+			String phone, String terminal, String location, 
+			String timeIn, String amount, String type, String feePk, int state)*/
+			map = doCommand("/messageStudent", idString, "", "", "", "", "", "", "", "", "", 1);
 			refreshMessageList(Integer.parseInt(idString));
 			String outputText = (String) map.get("message");
 			out.setText(outputText);
@@ -371,7 +363,10 @@ public class ManageFeeUI2 extends javax.swing.JDialog {
     	try {
     		int studentIndex = listStudent.getSelectedIndex();
     		int studentId = Integer.parseInt(listStudent.getSelectedValue().toString());
-			map = doCommand("/dropOverdueFee", "", idString, 2);
+    		/*(String action, String idNo, String firstName, String lastName,
+			String phone, String terminal, String location, 
+			String timeIn, String amount, String type, String feePk, int state)*/
+			map = doCommand("/dropOverdueFee", "", "", "", "", "", "", "", "", "", idString, 2);
 			refreshStudentList();
 			refreshFeeList(studentId);
 			try{
@@ -406,27 +401,20 @@ public class ManageFeeUI2 extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ManageFeeUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManageFeeUI2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ManageFeeUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManageFeeUI2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ManageFeeUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManageFeeUI2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ManageFeeUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManageFeeUI2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ManageFeeUI dialog = new ManageFeeUI(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+                new ManageFeeUI2().setVisible(true);
             }
         });
     }
@@ -464,7 +452,10 @@ public class ManageFeeUI2 extends javax.swing.JDialog {
     
     public void refreshStudentList(){
     	try {
-			HashMap map = doCommand("/viewStudents", "", "", 3);
+    		/*(String action, String idNo, String firstName, String lastName,
+			String phone, String terminal, String location, 
+			String timeIn, String amount, String type, String feePk, int state)*/
+			HashMap map = doCommand("/viewStudents", "", "", "", "", "", "", "", "", "", "", 3);
 			
 			ObjectMapper om = new ObjectMapper();
 			String mapString = (String) map.get("message");
@@ -492,7 +483,7 @@ public class ManageFeeUI2 extends javax.swing.JDialog {
     public double refreshFeeList(int id){
     	double total = 0.0;
     	try{
-			HashMap map = doCommand("/viewOverdueFees", Integer.toString(id), "", 1);
+			HashMap map = doCommand("/viewOverdueFees", Integer.toString(id), "", "", "", "", "", "", "", "", "", 1);
         	
 			ObjectMapper om = new ObjectMapper();
 			String mapString = (String) map.get("message");
@@ -514,7 +505,10 @@ public class ManageFeeUI2 extends javax.swing.JDialog {
     
     public void refreshMessageList(int id){
     	try{
-			HashMap map = doCommand("/viewMessages", Integer.toString(id), "", 1);
+    		/*(String action, String idNo, String firstName, String lastName,
+			String phone, String terminal, String location, 
+			String timeIn, String amount, String type, String feePk, int state)*/
+			HashMap map = doCommand("/viewMessages", Integer.toString(id), "", "", "", "", "", "", "", "", "", 1);
         	
 			ObjectMapper om = new ObjectMapper();
 			String mapString = (String) map.get("message");
@@ -543,70 +537,4 @@ public class ManageFeeUI2 extends javax.swing.JDialog {
     List<OverdueFee> fees;
     List<Message> messages;
     int lastIdSelected;
-    
-    //this method is present in ALL UI's.
-   
-    private static HashMap doCommand(String action, String idNo, String feePk, int state) throws Exception
-	{
-		String url1 = "http://localhost:8080/"+action;
-		
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		
-		switch (state){
-		case 1 :
-			//viewOverdueFees, dropAllOverdueFees, messageStudent, viewMessages
-			map.put(URLHandler.IDNO, idNo);
-			break;
-		case 2 :
-			//dropOverdueFee
-			map.put(URLHandler.FEEPK, feePk);
-			break;
-		case 3 :
-			//viewStudents
-			break;
-		}
-		
-		
-		
-		
-		// CONVERT JAVA DATA TO JSON
-		ObjectMapper mapper = new ObjectMapper();
-		String json1 = mapper.writeValueAsString(map);
-		
-		
-		// SEND TO SERVICE
-		String reply = NetUtil.postJsonDataToUrl(url1, json1);
-		
-		try
-		{
-			// CONVERT REPLY JSON STRING TO A JAVA OBJECT 
-			HashMap replyMap = (HashMap) mapper.readValue(reply, HashMap.class);
-			return replyMap;	
-		}
-		catch(Exception e)
-		{
-			//System.out.println(reply);
-			HashMap replyMap = new HashMap();
-			replyMap.put("message", reply);
-			return replyMap;	
-			
-		}
-	}
-    
-    @PostConstruct
-	public void tada()
-	{
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                setVisible(true);
-            }
-        });
-	}
-	
-	@Override
-	@Value("${app.name}")
-	public void setTitle(String s)
-	{
-		super.setTitle(s);
-	}
 }
