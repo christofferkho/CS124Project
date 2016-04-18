@@ -21,8 +21,7 @@ import app.entity.OverdueFee;
 import app.entity.Student;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-//@Component classes will be compiled and run automatically if they are autowired
-//URLHandler is where the http requests from the UI's are handled.
+
 @Component
 class URLHandler extends AbstractHandler {
 	
@@ -43,8 +42,7 @@ class URLHandler extends AbstractHandler {
 	public static final String TERMINAL = "terminal";
 	public static final String LOCATION = "location";
 	public static final String TIMEIN = "timeIn";
-	
-	//autowired, no need to instantiate anywhere in the code.
+
 	@Autowired
 	private Administrator admin;
 	
@@ -85,15 +83,6 @@ class URLHandler extends AbstractHandler {
 		// WARNING: these methods all assume JSON is being sent in the body
 		// 			i.e. they are all POSTs
 		 try {
-			//this entire section of the code can be summarized in the ff. steps:
-			//1. read the Hashmap using convertJsonToCommand(json) (universal for all if/else ifs)
-			//2. get the values from the hashmap and put them in variables (depends on the target)
-			//3. generate a string by sending the values from the hashmap to one of the Administrator's methods
-			//4. put the resulting string in the response. (universal for all if/else ifs)
-			//This process will be implemented according to the Template Pattern
-			//each target will have a concrete class of the Template
-			//the if/else ifs will be replaced by a simple factory that returns concrete classes of the template instead.
-			//the simple factory's method will have 2 parameters, the target string and the hashmap.
 			if (request.getMethod().equals("POST"))
 			 {
 				if (target.equalsIgnoreCase("/createStudent")) 
@@ -275,9 +264,7 @@ class URLHandler extends AbstractHandler {
 		}
 		((Request) request).setHandled(true);
 	}
-	
-	//the 2 methods below are used to convert the JSONs sent by the UI's to hashmaps.
-	//they will be methods inside the Template instead of being here.
+
 	private HashMap convertJsonToCommand(HttpServletRequest request) {
 		try {
 			String rawJson = null;

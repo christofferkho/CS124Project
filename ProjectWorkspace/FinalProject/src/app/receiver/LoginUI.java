@@ -18,9 +18,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  *
  * @author Francisco
  */
-//@Component classes will be compiled and run automatically if they are autowired
 @Component
-public class LoginUI extends javax.swing.JFrame {
+public class LoginUI extends MainUI {
 
     /**
      * Creates new form NewJFrame
@@ -167,7 +166,10 @@ public class LoginUI extends javax.swing.JFrame {
 				out.setText("Please input an ID number.");
 			}
 			else{
-				map = doCommand("/login", idNo, terminal, location, "", 1);
+				/*(String action, String idNo, String firstName, String lastName,
+				String phone, String terminal, String location, 
+				String timeIn, String amount, String type, String feePk, int state)*/
+				map = doCommand("/login", idNo, "", "", "", terminal, location, "", "", "", "", 1);
 				String outputText = (String) map.get("message");
 				timeIn = outputText;
 				timeIn = timeIn.substring(0, timeIn.length() - 1);
@@ -196,7 +198,10 @@ public class LoginUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     	HashMap map;
     	try {
-			map = doCommand("/logout", thisId, "", "", timeIn, 2);
+    		/*(String action, String idNo, String firstName, String lastName,
+			String phone, String terminal, String location, 
+			String timeIn, String amount, String type, String feePk, int state)*/
+			map = doCommand("/logout", thisId, "", "", "", "", "", timeIn, "", "", "", 1);
 			String outputText = (String) map.get("message");
 			out.setText("Logged out, " + outputText);
 			buttonLogin.setEnabled(true);
@@ -263,65 +268,5 @@ public class LoginUI extends javax.swing.JFrame {
     
     private String timeIn;
     private String thisId;
-    
-    private static HashMap doCommand(String action, String idNo, String terminal, String location, String timeIn, int state) throws Exception
-	{
-		String url1 = "http://localhost:8080/"+action;
-		
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		
-		switch (state){
-		case 1 :
-			map.put(URLHandler.IDNO, idNo);
-			map.put(URLHandler.TERMINAL, terminal);
-			map.put(URLHandler.LOCATION, location);
-			break;
-		case 2 :
-			map.put(URLHandler.IDNO, idNo);
-			map.put(URLHandler.TIMEIN, timeIn);
-			break;
-		}
-		
-		
-		// CONVERT JAVA DATA TO JSON
-		ObjectMapper mapper = new ObjectMapper();
-		String json1 = mapper.writeValueAsString(map);
-		
-		
-		// SEND TO SERVICE
-		String reply = NetUtil.postJsonDataToUrl(url1, json1);
-		//System.out.println("REPLY = "+reply);
-		
-		try
-		{
-			// CONVERT REPLY JSON STRING TO A JAVA OBJECT 
-			HashMap replyMap = (HashMap) mapper.readValue(reply, HashMap.class);
-			return replyMap;	
-		}
-		catch(Exception e)
-		{
-			//System.out.println(reply);
-			HashMap replyMap = new HashMap();
-			replyMap.put("message", reply);
-			return replyMap;	
-			
-		}
-	}
-    
-    @PostConstruct
-	public void tada()
-	{
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                setVisible(true);
-            }
-        });
-	}
-	
-	@Override
-	@Value("${app.name}")
-	public void setTitle(String s)
-	{
-		super.setTitle(s);
-	}
+
 }
