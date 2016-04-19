@@ -6,11 +6,28 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Value;
 
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public abstract class MainUI extends javax.swing.JFrame {
 	
+	//Student keys
+	public static final String IDNO = "idNo";
+	public static final String FN = "firstName";
+	public static final String LN = "lastName";
+	public static final String PNUMBER = "phoneNumber";
+	public static final String FLAGGED = "flagged";
 	
+	//fee keys
+	public static final String AMOUNT = "amount";
+	public static final String FEEPK = "overdueFeePk";
+	public static final String TYPE = "type";
+		
+	//terminal keys
+	public static final String TERMINALPK = "terminalAccessPk";
+	public static final String TERMINAL = "terminal";
+	public static final String LOCATION = "location";
+	public static final String TIMEIN = "timeIn";
 	
 	protected static HashMap doCommand(String action, String idNo, String firstName, String lastName,
 			String phone, String terminal, String location, 
@@ -20,16 +37,16 @@ public abstract class MainUI extends javax.swing.JFrame {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
-		map.put(URLHandler.IDNO, idNo);
-		map.put(URLHandler.FN, firstName);
-		map.put(URLHandler.LN, lastName);
-		map.put(URLHandler.PNUMBER, phone);
-		map.put(URLHandler.TERMINAL, terminal);
-		map.put(URLHandler.LOCATION, location);
-		map.put(URLHandler.TIMEIN, timeIn);
-		map.put(URLHandler.AMOUNT, amount);
-		map.put(URLHandler.TYPE, type);
-		map.put(URLHandler.FEEPK, feePk);
+		map.put(IDNO, idNo);
+		map.put(FN, firstName);
+		map.put(LN, lastName);
+		map.put(PNUMBER, phone);
+		map.put(TERMINAL, terminal);
+		map.put(LOCATION, location);
+		map.put(TIMEIN, timeIn);
+		map.put(AMOUNT, amount);
+		map.put(TYPE, type);
+		map.put(FEEPK, feePk);
 		
 		
 		

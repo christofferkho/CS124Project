@@ -30,7 +30,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  *
  * @author Francisco
  */
-@Component
+//@Component
 public class ManageFeeUI2 extends MainUI {
 
     /**

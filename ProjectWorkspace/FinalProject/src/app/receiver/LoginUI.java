@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  *
  * @author Francisco
  */
-@Component
+//@Component
 public class LoginUI extends MainUI {
 
     /**
