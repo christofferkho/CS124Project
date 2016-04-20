@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  *
  * @author 
  */
-@Component
+//@Component
 public class CreateOverdueUI2 extends MainUI {
 
     /**

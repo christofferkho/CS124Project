@@ -1,0 +1,28 @@
+package app.receiver.handler;
+
+import java.util.HashMap;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class CreateStudentRequest extends RequestTemplate{
+	
+	private String firstName, lastName, phoneNumber = "";
+	private int id = -1;
+	@Override
+	void getArgs(HashMap map) {
+		// TODO Auto-generated method stub
+		String idNo = (String) map.get(IDNO);
+		firstName = (String) map.get(FN);
+		lastName = (String) map.get(LN);
+		phoneNumber = (String) map.get(PNUMBER);
+		id = Integer.parseInt(idNo);
+	}
+
+	@Override
+	String doCommand() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
