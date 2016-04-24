@@ -1,0 +1,20 @@
+package app.entity;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+public class AccessLog {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="pk")
+	private Long id;
+	
+	@Column(name = "timeIn")
+	private java.sql.Timestamp timeIn;
+	
+	@Column(name = "timeOut")
+	private java.sql.Timestamp timeOut;
+
+}
