@@ -1,0 +1,42 @@
+package app.component;
+
+import app.entity.Student;
+
+public class CreateStudentCommand extends Command {
+	
+	private Student student;
+
+	@Override
+	public String undo(Exception e) {
+		// TODO Auto-generated method stub
+		
+		e.printStackTrace();
+		return "Database error " + e.getMessage();
+	}
+
+	@Override
+	public String execute() {
+		// TODO Auto-generated method stub
+		try {
+			Student student = new Student(idNo, firstName, lastName, phoneNumber, false);
+			studentDao.save(student);
+			return "New Student: " + firstName + " " + lastName + ": " + idNo + ", " + phoneNumber;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return undo(e);
+		}
+	}
+	
+	public String createStudent(int idNo, String firstName, String lastName, String phoneNumber){
+    	try {
+			Student student = new Student(idNo, firstName, lastName, phoneNumber, false);
+			studentDao.save(student);
+			return "New Student: " + firstName + " " + lastName + ": " + idNo + ", " + phoneNumber;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "Database error " + e.getMessage();
+		}
+    }
+
+}

@@ -9,10 +9,6 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import app.component.Administrator;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -37,9 +33,6 @@ public abstract class RequestTemplate {
 	public static final String LOCATION = "location";
 	public static final String TIMEIN = "timeIn";
 	//protected Command command;
-	
-	@Autowired
-	protected Administrator admin;
 	
 	public void attemptRequest(HttpServletRequest request, HttpServletResponse response){
 		HashMap map = convertJsonToCommand(request);
