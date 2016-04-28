@@ -1,0 +1,5 @@
+package app.receiver.handler;
+
+public class ViewTerminalsRequest {
+
+}

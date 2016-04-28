@@ -1,0 +1,22 @@
+package app.receiver.handler;
+
+import java.util.HashMap;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class ConnectionRequest extends RequestTemplate {
+
+	@Override
+	protected void getArgs(HashMap map) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected String doCommand() {
+		// TODO Auto-generated method stub
+		return "1";
+	}
+
+}

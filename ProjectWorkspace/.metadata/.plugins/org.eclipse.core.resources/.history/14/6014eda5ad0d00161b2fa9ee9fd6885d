@@ -1,0 +1,48 @@
+package app.receiver.handler;
+
+import java.util.HashMap;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import app.component.LoginCommand;
+
+@Component
+public class LoginRequest extends RequestTemplate {
+	
+	//@Autowired
+	//private LoginCommand command;
+	
+	int idNo = -1;
+	int terminalPk = -1;
+	
+	public LoginRequest(){
+		command = new LoginCommand();
+	}
+
+	@Override
+	protected void getArgs(HashMap map) {
+		// TODO Auto-generated method stub
+		String idNoString = (String) map.get(IDNO);
+		String terminalPkString = (String) map.get(TERMINALPK);
+		
+		idNo = Integer.parseInt(idNoString);
+		terminalPk = Integer.parseInt(terminalPkString);
+	}
+
+	@Override
+	protected String doCommand() {
+		// TODO Auto-generated method stub
+		if(terminalPk != -1 && idNo != -1){
+			command.createAccessLog(idNo, terminalPk);
+			terminalPk = -1;
+			idNo = -1;
+			return command.execute();
+		}
+		else{
+			return "failed";
+		}
+		
+	}
+
+}

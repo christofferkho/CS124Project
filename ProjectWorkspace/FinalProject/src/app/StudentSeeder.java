@@ -10,7 +10,7 @@ import app.entity.Student;
 import app.repositories.StudentRepository;
 
 //@Profile("studentSeeder")
-@Component
+//@Component
 public class StudentSeeder {
 	
 	@Autowired

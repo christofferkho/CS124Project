@@ -1,0 +1,5 @@
+package app.component;
+
+public class LogoutCommand {
+
+}

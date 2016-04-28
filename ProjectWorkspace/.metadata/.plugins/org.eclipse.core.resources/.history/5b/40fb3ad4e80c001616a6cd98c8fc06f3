@@ -1,0 +1,25 @@
+package app.component;
+
+import app.entity.Terminal;
+
+public class CreateTerminalCommand extends Command {
+	
+	private Terminal terminal;
+
+	@Override
+	public String undo(Exception e) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String execute() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public void createTerminal(int terminalNumber, String roomname){
+		terminal = new Terminal(terminalNumber,roomname);
+	}
+
+}

@@ -10,61 +10,71 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class RequestFactory {
+	
 	@Autowired
-	private CreateStudentRequest createStudent;
+	private CreateStudentRequest createStudentRequest;
+	
+	@Autowired
+	private CreateTerminalRequest createTerminalRequest;
+	
+	@Autowired
+	private LoginRequest loginRequest;
+	
+	@Autowired
+	private LogoutRequest logoutRequest;
+	
+	@Autowired
+	private GetPromoRequest getPromoRequest;
+	
+	@Autowired
+	private ViewTerminalsRequest viewTerminalsRequest;
+	
+	@Autowired
+	private ViewAccessLogsRequest viewAccessLogsRequest;
+	//private RequestTemplate requestTemplate;
 	
 	public void createRequest(HttpServletRequest request, HttpServletResponse response,
 			String target){
 		if (target.equalsIgnoreCase("/createStudent")) 
 		{
-			/*
-			// read the parameters
-			HashMap command = convertJsonToCommand(request);
-			// send stuff to grocery
-			String product = (String) command.get("product");
-			String quantity = (String) command.get("quantity");
-			String location = (String) command.get("location");
-			String employee = (String) command.get("employee");
-			
-			double doubleQuantity = Double.parseDouble(quantity);
-			String reply = grocery.buy(product, doubleQuantity, location, employee);
-			// write the reply
-			response.getWriter().println(reply);
-			*/
-			
-			// read the parameters
-			/*
-			HashMap command = convertJsonToCommand(request);
-			
-			String id = (String) command.get(IDNO);
-			String firstName = (String) command.get(FN);
-			String lastName = (String) command.get(LN);
-			String phoneNumber = (String) command.get(PNUMBER);
-			
-			int idNo = Integer.parseInt(id);
-			// send stuff to Administrator
-			String reply = admin.createStudent(idNo, firstName, lastName, phoneNumber);
-			
-			// write the reply
-			response.getWriter().println(reply);*/
 			//requestTemplate = new CreateStudentRequest();
-			createStudent.attemptRequest(request, response);
+			createStudentRequest.attemptRequest(request, response);
 		}
+		else if (target.equalsIgnoreCase("/connect")) 
+		{
+			try {
+				response.getWriter().println("1");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} 
+		else if (target.equalsIgnoreCase("/createTerminal")) 
+		{
+			//requestTemplate = new CreateTerminalRequest();
+			createTerminalRequest.attemptRequest(request, response);
+		} 
 		else if (target.equalsIgnoreCase("/login")) 
-		{/*
-			// read the parameters
-			HashMap command = convertJsonToCommand(request);
-			
-			String id = (String) command.get(IDNO);
-			String terminal = (String) command.get(TERMINAL);
-			String location = (String) command.get(LOCATION);
-			
-			int idNo = Integer.parseInt(id);
-			// send stuff to Administrator
-			String reply = admin.login(idNo, terminal, location);
-			
-			// write the reply
-			response.getWriter().println(reply);*/
+		{
+			//requestTemplate = new LoginRequest();
+			loginRequest.attemptRequest(request, response);
+		} 
+		else if (target.equalsIgnoreCase("/logout")) 
+		{
+			//requestTemplate = new LogoutRequest();
+			logoutRequest.attemptRequest(request, response);
+		} 
+		else if (target.equalsIgnoreCase("/getPromoURL")) 
+		{
+			getPromoRequest.attemptRequest(request, response);
+		} 
+		else if (target.equalsIgnoreCase("/viewTerminals")) 
+		{
+			viewTerminalsRequest.attemptRequest(request, response);
+		} 
+		else if (target.equalsIgnoreCase("/viewAccessLogs")) 
+		{
+			viewAccessLogsRequest.attemptRequest(request, response);
 		} 
 		else {
 			// invalid request

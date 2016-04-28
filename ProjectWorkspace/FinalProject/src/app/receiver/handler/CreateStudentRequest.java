@@ -11,26 +11,12 @@ import app.component.CreateStudentCommand;
 public class CreateStudentRequest extends RequestTemplate{
 	
 	@Autowired
-	protected CreateStudentCommand command;
-
-	public CreateStudentRequest(){}
+	private CreateStudentCommand command;
 	
-	private String firstName, lastName = "";
-	private int id = -1;
 	@Override
-	protected void getArgs(HashMap map) {
+	protected String doCommand(HashMap map) {
 		// TODO Auto-generated method stub
-		String idNo = (String) map.get(IDNO);
-		firstName = (String) map.get(FN);
-		lastName = (String) map.get(LN);
-		id = Integer.parseInt(idNo);
-	}
-
-	@Override
-	protected String doCommand() {
-		// TODO Auto-generated method stub
-		command.createStudent(id, firstName, lastName);
-		return command.execute();
+		return command.execute(map);
 	}
 
 }
