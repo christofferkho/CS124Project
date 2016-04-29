@@ -1,0 +1,33 @@
+package app.component;
+
+import java.util.HashMap;
+import java.util.List;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import app.entity.Terminal;
+
+public class ViewTerminalsCommand extends Command{
+	
+	private ObjectMapper om = new ObjectMapper();
+
+	@Override
+	public String undo(Exception e) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String execute(HashMap map) {
+		// TODO Auto-generated method stub
+		List<Terminal> terminals = getTerminals(){
+			
+		}
+		return null;
+	}
+	
+	private List<Terminal> getTerminals(){
+		return terminalDao.findAll();
+	}
+
+}

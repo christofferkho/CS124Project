@@ -1,0 +1,19 @@
+package app.receiver.handler;
+
+import java.util.HashMap;
+
+public class LogoutRequest extends RequestTemplate {
+
+	@Override
+	protected void getArgs(HashMap map) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected String doCommand() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+}

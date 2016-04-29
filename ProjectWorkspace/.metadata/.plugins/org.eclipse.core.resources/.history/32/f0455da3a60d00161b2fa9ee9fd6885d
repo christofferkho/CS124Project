@@ -1,0 +1,34 @@
+package app.component;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import app.repositories.AccessLogRepository;
+import app.repositories.PromoRepository;
+import app.repositories.StudentRepository;
+import app.repositories.TerminalRepository;
+
+public abstract class Command {
+	
+	@Autowired
+	protected AccessLogRepository accessLogDao;
+	
+	@Autowired
+	protected StudentRepository studentDao;
+	
+	@Autowired
+	protected TerminalRepository terminalDao;
+	
+	@Autowired
+	protected PromoRepository promoDao;
+	
+	public abstract String undo(Exception e);
+	public abstract String execute();
+	
+	public String getDate(){
+		Calendar calendar = Calendar.getInstance();
+		Date current = calendar.getTime();
+		DateFormat date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+		
+		return date.format(current);
+	}
+}

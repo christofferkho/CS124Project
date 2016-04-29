@@ -1,0 +1,22 @@
+package app.component;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import app.repositories.AccessLogRepository;
+import app.repositories.StudentRepository;
+import app.repositories.TerminalRepository;
+
+public abstract class Command {
+	
+	@Autowired
+	private AccessLogRepository accessLogDao;
+	
+	@Autowired
+	protected StudentRepository studentDao;
+	
+	@Autowired
+	private TerminalRepository terminalDao;
+	
+	public abstract String undo(Exception e);
+	public abstract String execute();
+}

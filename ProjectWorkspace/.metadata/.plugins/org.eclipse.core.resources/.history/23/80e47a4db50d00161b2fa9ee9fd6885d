@@ -1,0 +1,29 @@
+package app.component;
+
+import java.util.HashMap;
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
+import app.entity.AccessLog;
+
+@Component
+public class ViewAccessLogsCommand extends Command{
+
+	@Override
+	public String undo(Exception e) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String execute(HashMap map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	private List<AccessLog> getAccessLogs(){
+		return accessLogDao.findAll();
+	}
+
+}

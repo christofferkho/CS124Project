@@ -1,0 +1,44 @@
+package app.component;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import app.entity.Terminal;
+import app.repositories.TerminalRepository;
+
+@Component
+public class CreateTerminalCommand extends Command {
+	
+	@Autowired
+	private TerminalRepository terminalDao;
+	
+	private Terminal terminal;
+
+	@Override
+	public String undo(Exception e) {
+		// TODO Auto-generated method stub
+		
+		e.printStackTrace();
+		terminalDao.delete(terminal);
+		return "Database error " + e.getMessage();
+	}
+
+	@Override
+	public String execute() {
+		// TODO Auto-generated method stub
+		try {
+			terminal = terminalDao.save(terminal);
+			String ret = terminal.toString();
+			terminal = null;
+			return ret;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return undo(e);
+		}
+	}
+	
+	public void createTerminal(int terminalNumber, String roomName){
+		terminal = new Terminal(terminalNumber,roomName);
+	}
+
+}

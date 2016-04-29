@@ -1,0 +1,24 @@
+package app.receiver.handler;
+
+import java.util.HashMap;
+
+public class CreateTerminalRequest extends RequestTemplate {
+
+	private int terminalNumber;
+	private String roomName;
+	@Override
+	protected void getArgs(HashMap map) {
+		// TODO Auto-generated method stub
+		String termNum = (String) map.get(TERMINALNUM);
+		String roomName = (String) map.get(ROOMNAME);
+		terminalNumber = Integer.parseInt(termNum);
+	}
+
+	@Override
+	protected String doCommand() {
+		// TODO Auto-generated method stub
+		
+		return null;
+	}
+
+}

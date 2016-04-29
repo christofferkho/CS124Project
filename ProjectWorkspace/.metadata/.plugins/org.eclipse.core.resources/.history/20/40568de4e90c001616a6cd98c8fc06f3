@@ -1,0 +1,32 @@
+package app.receiver.handler;
+
+import java.util.HashMap;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import app.component.CreateTerminalCommand;
+
+@Component
+public class CreateTerminalRequest extends RequestTemplate {
+	
+	@Autowired
+	private CreateTerminalCommand command;
+
+	private int terminalNumber;
+	private String roomName;
+	@Override
+	protected void getArgs(HashMap map) {
+		// TODO Auto-generated method stub
+		String termNum = (String) map.get(TERMINALNUM);
+		roomName = (String) map.get(ROOMNAME);
+		terminalNumber = Integer.parseInt(termNum);
+	}
+
+	@Override
+	protected String doCommand() {
+		// TODO Auto-generated method stub
+		command.createTerminal(terminalNumber, roomName);
+		return command.execute();
+	}
+
+}

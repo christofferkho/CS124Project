@@ -1,16 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="app.component.Administrator"/>
-<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
-<fullyQualifiedTypeName name="java.util.HashMap"/>
-<fullyQualifiedTypeName name="app.component.CreateStudentCommand"/>
-<fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
 <fullyQualifiedTypeName name="javax.persistence.GeneratedValue"/>
 <fullyQualifiedTypeName name="javax.persistence.GenerationType"/>
 <fullyQualifiedTypeName name="javax.persistence.ManyToOne"/>
-<fullyQualifiedTypeName name="java.sql.Timestamp"/>
-<fullyQualifiedTypeName name="app.entity.AccessLog"/>
-<fullyQualifiedTypeName name="app.entity.Terminal"/>
-<fullyQualifiedTypeName name="app.entity.Promo"/>
 <fullyQualifiedTypeName name="javax.persistence.Entity"/>
+<fullyQualifiedTypeName name="app.component.Command"/>
+<fullyQualifiedTypeName name="app.component.CreateStudentCommand"/>
+<fullyQualifiedTypeName name="app.repositories.TerminalRepository"/>
+<fullyQualifiedTypeName name="app.component.CreateTerminalCommand"/>
+<fullyQualifiedTypeName name="org.springframework.stereotype.Repository"/>
+<fullyQualifiedTypeName name="app.repositories.AccessLogRepository"/>
+<fullyQualifiedTypeName name="app.repositories.PromoRepository"/>
+<fullyQualifiedTypeName name="app.entity.Student"/>
+<fullyQualifiedTypeName name="java.sql.Timestamp"/>
+<fullyQualifiedTypeName name="java.util.Calendar"/>
+<fullyQualifiedTypeName name="java.sql.Date"/>
+<fullyQualifiedTypeName name="java.text.DateFormat"/>
+<fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
+<fullyQualifiedTypeName name="app.component.LoginCommand"/>
+<fullyQualifiedTypeName name="app.component.LogoutCommand"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="app.receiver.handler.CreateTerminalRequest"/>
+<fullyQualifiedTypeName name="app.entity.Promo"/>
+<fullyQualifiedTypeName name="app.component.GetPromoCommand"/>
+<fullyQualifiedTypeName name="app.entity.Terminal"/>
+<fullyQualifiedTypeName name="app.component.ViewTerminalsCommand"/>
+<fullyQualifiedTypeName name="app.receiver.handler.ViewTerminalsRequest"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="app.entity.AccessLog"/>
+<fullyQualifiedTypeName name="com.fasterxml.jackson.databind.ObjectMapper"/>
+<fullyQualifiedTypeName name="app.receiver.handler.RequestTemplate"/>
+<fullyQualifiedTypeName name="app.component.ViewAccessLogsCommand"/>
+<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+<fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
 </qualifiedTypeNameHistroy>
