@@ -1,6 +1,0 @@
-package app.component;
-
-public abstract class Command {
-	public abstract void undo();
-	
-}

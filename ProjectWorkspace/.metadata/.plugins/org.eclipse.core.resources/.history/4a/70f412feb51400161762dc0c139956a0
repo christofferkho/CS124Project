@@ -1,0 +1,9 @@
+package app.receiver.observer;
+
+import java.util.ArrayList;
+
+import app.entity.AccessLog;
+
+public interface Observer {
+	public  void update(ArrayList<AccessLog> result);
+}

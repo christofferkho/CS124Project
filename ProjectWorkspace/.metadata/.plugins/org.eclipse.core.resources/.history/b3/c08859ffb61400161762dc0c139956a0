@@ -1,0 +1,68 @@
+package app.receiver.observable;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import app.entity.AccessLog;
+import app.receiver.NetUtil;
+import app.receiver.observer.Observer;
+
+public class AccessLogListener implements Subject {
+	private ArrayList<Observer> observers = new ArrayList<Observer>();
+	private ArrayList<AccessLog> accessLogs = new ArrayList<AccessLog>();
+	private HashMap<String, Object> map = new HashMap<String, Object>();
+	private ObjectMapper mapper = new ObjectMapper();
+	private String json1;
+	
+	public AccessLogListener(){
+		try {
+			this.json1 = mapper.writeValueAsString(map);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void run(){
+		Thread t = new Thread(new Runnable(){
+				
+			String reply;
+			String url1 = "http://localhost:8080/"+"/viewAccessLogs";
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				try {
+					String reply = NetUtil.postJsonDataToUrl(url1, json1);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+		});
+	}
+
+	@Override
+	public void registerObserver(Observer observer) {
+		// TODO Auto-generated method stub
+		observers.add(observer);
+	}
+
+	@Override
+	public void notifyObservers() {
+		// TODO Auto-generated method stub
+		for(Observer o: observers){
+			o.update(accessLogs);
+		}
+	}
+
+	@Override
+	public void removeObserver(Observer observer) {
+		// TODO Auto-generated method stub
+		observers.remove(observer);
+	}
+
+}

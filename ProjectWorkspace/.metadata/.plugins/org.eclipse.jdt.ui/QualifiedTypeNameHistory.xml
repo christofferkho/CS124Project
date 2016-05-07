@@ -20,7 +20,6 @@
 <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
 <fullyQualifiedTypeName name="app.component.LoginCommand"/>
 <fullyQualifiedTypeName name="app.component.LogoutCommand"/>
-<fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="app.receiver.handler.CreateTerminalRequest"/>
 <fullyQualifiedTypeName name="app.entity.Promo"/>
 <fullyQualifiedTypeName name="app.component.GetPromoCommand"/>
@@ -28,10 +27,20 @@
 <fullyQualifiedTypeName name="app.component.ViewTerminalsCommand"/>
 <fullyQualifiedTypeName name="app.receiver.handler.ViewTerminalsRequest"/>
 <fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="app.entity.AccessLog"/>
-<fullyQualifiedTypeName name="com.fasterxml.jackson.databind.ObjectMapper"/>
 <fullyQualifiedTypeName name="app.receiver.handler.RequestTemplate"/>
 <fullyQualifiedTypeName name="app.component.ViewAccessLogsCommand"/>
 <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
 <fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
+<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Configurable"/>
+<fullyQualifiedTypeName name="app.receiver.observer.Observer"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="app.receiver.observable.Subject"/>
+<fullyQualifiedTypeName name="app.receiver.observable.AccessLogListener"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="java.util.Timer"/>
+<fullyQualifiedTypeName name="java.util.TimerTask"/>
+<fullyQualifiedTypeName name="app.entity.AccessLog"/>
+<fullyQualifiedTypeName name="com.fasterxml.jackson.databind.ObjectMapper"/>
+<fullyQualifiedTypeName name="com.fasterxml.jackson.core.type.TypeReference"/>
+<fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
 </qualifiedTypeNameHistroy>

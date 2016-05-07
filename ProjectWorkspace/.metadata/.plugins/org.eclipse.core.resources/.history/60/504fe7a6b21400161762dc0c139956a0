@@ -1,0 +1,57 @@
+package app.component;
+
+import java.util.HashMap;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.stereotype.Component;
+
+import app.entity.Student;
+import app.repositories.StudentRepository;
+
+@Configurable
+public class CreateStudentCommand extends Command {
+	
+	private Student student;
+	
+	public CreateStudentCommand(Student student){
+		this.student = student;
+	}
+
+	@Override
+	public String undo(Exception e) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String execute(HashMap map) {
+		// TODO Auto-generated method stub
+		//student = createStudent(map);
+		int err = 1;
+		try {
+			student = createStudent(map);
+			student = studentDao.save(student);
+			err++;//2
+			String ret = Integer.toString(student.getIdNo());
+			err++;//3
+			student = null;
+			err++;//4
+			return ret;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return "Database error: " + err + " " + e.getMessage();
+		}
+	}
+	
+	private Student createStudent(HashMap map){
+		String idNo = (String) map.get(IDNO);
+		String firstName = (String) map.get(FIRSTNAME);
+		String lastName = (String) map.get(LASTNAME);
+		int id = Integer.parseInt(idNo);
+		return new Student(id, firstName, lastName);
+    }
+	
+	
+
+}
