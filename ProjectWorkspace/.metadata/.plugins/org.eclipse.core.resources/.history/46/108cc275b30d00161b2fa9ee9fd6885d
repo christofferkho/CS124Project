@@ -1,5 +1,0 @@
-package app.component;
-
-public class GetPromoCommand extends Command {
-	
-}

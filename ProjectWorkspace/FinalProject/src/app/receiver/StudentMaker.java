@@ -141,9 +141,9 @@ public class StudentMaker extends MainUI {
 			String ln = fieldLastName.getText();
 			//String phone = fieldPhone.getText();
 			HashMap<String, Object> mapSend = new HashMap<String, Object>();
-			mapSend.put(ACCESSLOGPK, idNo);
-			//mapSend.put(FIRSTNAME, fn);
-			//mapSend.put(LASTNAME, ln);
+			mapSend.put(IDNO, idNo);
+			mapSend.put(FIRSTNAME, fn);
+			mapSend.put(LASTNAME, ln);
 			if (idNo.equals("") || fn.equals("") || ln.equals("")){
 				jTextArea1.setText("Please fill up all fields.");
 			}
@@ -151,7 +151,7 @@ public class StudentMaker extends MainUI {
 				/*(String action, String idNo, String firstName, String lastName,
 				String phone, String terminal, String location, 
 				String timeIn, String amount, String type, String feePk, int state)*/
-				map = doCommand("/logout", mapSend);
+				map = doCommand("/createStudent", mapSend);
 				String outputText = (String) map.get("message");
 				jTextArea1.setText(outputText);
 				//out.setText(outputText);

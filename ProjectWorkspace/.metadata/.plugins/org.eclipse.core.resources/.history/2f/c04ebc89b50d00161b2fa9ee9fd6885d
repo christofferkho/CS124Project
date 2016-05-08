@@ -1,5 +1,0 @@
-package app.receiver.handler;
-
-public class ViewAccessLogsRequest {
-
-}
