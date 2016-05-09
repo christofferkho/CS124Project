@@ -18,6 +18,8 @@ public class AccessLogListener implements Subject {
 	private ObjectMapper mapper = new ObjectMapper();
 	private String json1;
 	
+	private String IPPORT;
+	
 	public AccessLogListener(){
 		try {
 			this.json1 = mapper.writeValueAsString(map);
@@ -27,12 +29,20 @@ public class AccessLogListener implements Subject {
 		}
 	}
 	
+	public String getIPPORT() {
+		return IPPORT;
+	}
+
+	public void setIPPORT(String iPPORT) {
+		IPPORT = iPPORT;
+	}
+	
 	public void run(){
 		Timer t = new Timer();
 		t.schedule(new TimerTask(){
 				
 			String oldReply = "";
-			String url1 = "http://localhost:8080/"+"/viewAccessLogs";
+			String url1 = "http://" + IPPORT + "/"+"/viewAccessLogs";
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
