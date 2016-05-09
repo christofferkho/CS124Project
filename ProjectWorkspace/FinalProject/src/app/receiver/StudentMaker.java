@@ -19,7 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  *
  * @author Francisco
  */
-@Component
+//@Component
 public class StudentMaker extends MainUI {
 
     /**
@@ -142,7 +142,7 @@ public class StudentMaker extends MainUI {
 			//String phone = fieldPhone.getText();
 			HashMap<String, Object> mapSend = new HashMap<String, Object>();
 			mapSend.put(IDNO, idNo);
-			mapSend.put(FIRSTNAME, fn);
+			mapSend.put(TERMINALPK, fn);
 			mapSend.put(LASTNAME, ln);
 			if (idNo.equals("") || fn.equals("") || ln.equals("")){
 				jTextArea1.setText("Please fill up all fields.");
@@ -151,7 +151,7 @@ public class StudentMaker extends MainUI {
 				/*(String action, String idNo, String firstName, String lastName,
 				String phone, String terminal, String location, 
 				String timeIn, String amount, String type, String feePk, int state)*/
-				map = doCommand("/createStudent", mapSend);
+				map = doCommand("/login", mapSend);
 				String outputText = (String) map.get("message");
 				jTextArea1.setText(outputText);
 				//out.setText(outputText);

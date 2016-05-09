@@ -13,42 +13,32 @@ public abstract class MainUI extends javax.swing.JFrame {
 	
 	//Student keys
 	public static final String IDNO = "idNo";
-	public static final String FN = "firstName";
-	public static final String LN = "lastName";
-	public static final String PNUMBER = "phoneNumber";
-	public static final String FLAGGED = "flagged";
+	public static final String FIRSTNAME = "firstName";
+	public static final String LASTNAME = "lastName";
 	
-	//fee keys
-	public static final String AMOUNT = "amount";
-	public static final String FEEPK = "overdueFeePk";
-	public static final String TYPE = "type";
+	//Promo keys
+	public static final String PROMOPK = "promoPk";
 		
-	//terminal keys
+	//Terminal keys
 	public static final String TERMINALPK = "terminalAccessPk";
-	public static final String TERMINAL = "terminal";
-	public static final String LOCATION = "location";
-	public static final String TIMEIN = "timeIn";
+	public static final String TERMINALNUM = "terminalNum";
+	public static final String ROOMNAME = "roomName";
 	
-	protected static HashMap doCommand(String action, String idNo, String firstName, String lastName,
-			String phone, String terminal, String location, 
-			String timeIn, String amount, String type, String feePk, int state) throws Exception
+	//AccessLog keys
+	public static final String ACCESSLOGPK = "accessLogPk";
+	public static final String TIMEIN = "timeIn";
+	public static final String TIMEOUT = "timeOut";
+	
+	protected static String IPPORT = "";
+	
+	public void setIPPORT(String s){
+		this.IPPORT = s;
+	}
+	
+	
+	protected static HashMap doCommand(String action, HashMap map) throws Exception
 	{
-		String url1 = "http://localhost:8080/"+action;
-		
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		
-		map.put(IDNO, idNo);
-		map.put(FN, firstName);
-		map.put(LN, lastName);
-		map.put(PNUMBER, phone);
-		map.put(TERMINAL, terminal);
-		map.put(LOCATION, location);
-		map.put(TIMEIN, timeIn);
-		map.put(AMOUNT, amount);
-		map.put(TYPE, type);
-		map.put(FEEPK, feePk);
-		
-		
+		String url1 = "http://" + IPPORT + "/" +action;
 		
 		// CONVERT JAVA DATA TO JSON
 		ObjectMapper mapper = new ObjectMapper();

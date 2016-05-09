@@ -5,6 +5,8 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import app.entity.Terminal;
 import app.repositories.TerminalRepository;
 
@@ -12,6 +14,8 @@ import app.repositories.TerminalRepository;
 public class CreateTerminalCommand extends Command {
 	
 	private Terminal terminal;
+	
+	private ObjectMapper om = new ObjectMapper();
 
 	@Override
 	public String undo(Exception e) {
@@ -28,7 +32,7 @@ public class CreateTerminalCommand extends Command {
 		terminal = createTerminal(map);
 		try {
 			terminal = terminalDao.save(terminal);
-			String ret = terminal.getId().toString();
+			String ret = om.writeValueAsString(terminal);
 			terminal = null;
 			return ret;
 		} catch (Exception e) {
