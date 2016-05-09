@@ -27,7 +27,7 @@ public class LogoutCommand extends Command {
 		DateFormat date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 		try {
 			logout = accessLogDao.save(logout);
-			String ret = date.format(logout.getTimeIn());
+			String ret = date.format(logout.getTimeOut());
 			logout = null;
 			
 			return ret;

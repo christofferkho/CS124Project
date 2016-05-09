@@ -18,7 +18,7 @@ public class LoginCommand extends Command {
 	
 	private AccessLog login;
 
-	private ObjectMapper om = new ObjectMapper();
+	//private ObjectMapper om = new ObjectMapper();
 	
 	@Override
 	public String undo(Exception e) {
@@ -34,17 +34,22 @@ public class LoginCommand extends Command {
 		// TODO Auto-generated method stub
 		login = createAccessLog(map);
 		DateFormat date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-		HashMap<String, Object> mapSend = new HashMap<String, Object>();
+		//HashMap<String, Object> mapSend = new HashMap<String, Object>();
 		String ret = "";
 		try {
-			login = accessLogDao.save(login);
-			String timeIn = date.format(login.getTimeIn());
-			String loginPk = login.getId().toString();
-			mapSend.put(ACCESSLOGPK, loginPk);
-			mapSend.put(TIMEIN, timeIn);
-			login = null;
-			
-			ret = om.writeValueAsString(mapSend);
+			if (login != null) {
+				login = accessLogDao.save(login);
+				String timeIn = date.format(login.getTimeIn());
+				String loginPk = login.getId().toString();
+				//mapSend.put(ACCESSLOGPK, loginPk);
+				//mapSend.put(TIMEIN, timeIn);
+				login = null;
+				//ret = om.writeValueAsString(mapSend);
+				ret = loginPk + "/" + timeIn;
+			}
+			else{
+				ret = "-1";
+			}
 			return ret;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -63,7 +68,7 @@ public class LoginCommand extends Command {
 		Student student = studentDao.findByIdNo(idNo);
 		long pk = terminalPk;
 		Terminal terminal = terminalDao.findById(pk);
-		if(student != null){
+		if(student != null && terminal != null){
 			Timestamp timestamp = getDate();
 			return new AccessLog(timestamp, student, terminal);
 		}

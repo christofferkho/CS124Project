@@ -1,12 +1,26 @@
-
 package app.receiver;
 
-public class Login extends MainUI {
+import java.util.HashMap;
 
-    public Login() {
+import javax.swing.JOptionPane;
+
+/**
+ * @author April Guevara
+ * @author (?)
+ */
+
+public class Login extends MainUI {
+    public Login( int id, int tNum, String rName ) {
+    	// these variables will be needed in initComponents
+    	PCId = id;
+    	terminalNo = tNum;
+    	roomName = rName;
+    	// so that the screen won't appear on some corner that I have to drag at the center
+    	setLocationRelativeTo( null );
+    	
         initComponents();
         // for the advertisement use
-            //.add(new JLabel(new ImageIcon("Path/To/Your/Image.png")));
+        //.add(new JLabel(new ImageIcon("Path/To/Your/Image.png")));
         
     }
 
@@ -18,7 +32,7 @@ public class Login extends MainUI {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnLogin = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         lblRoom = new javax.swing.JLabel();
         lblTerminal = new javax.swing.JLabel();
@@ -51,22 +65,28 @@ public class Login extends MainUI {
         gridBagConstraints.ipady = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 120, 0, 0);
-        jPanel1.add(txtId, gridBagConstraints);
+        jPanel1.add(txtId, gridBagConstraints);        
 
-        jButton1.setText("Login");
+        btnLogin.setText("Login");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.ipady = 7;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 170, 26, 0);
-        jPanel1.add(jButton1, gridBagConstraints);
+        jPanel1.add(btnLogin, gridBagConstraints);
 
-        jPanel2.setLayout(new java.awt.GridLayout());
+        jPanel2.setLayout(new java.awt.GridLayout());        
 
         lblRoom.setBackground(new java.awt.Color(231, 231, 231));
         lblRoom.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        lblRoom.setText("Room Name");
+        // set the text to the room name taken from the set-up screen
+        lblRoom.setText( "Room " + roomName );
         lblRoom.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 20, 0, 20));
         lblRoom.setEnabled(false);
         jPanel2.add(lblRoom);
@@ -74,7 +94,8 @@ public class Login extends MainUI {
         lblTerminal.setBackground(new java.awt.Color(231, 231, 231));
         lblTerminal.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         lblTerminal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblTerminal.setText("Terminal No.");
+        // set the text to the terminal number taken from the set-up screen
+        lblTerminal.setText( "Terminal#" + terminalNo );
         lblTerminal.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 20, 0, 20));
         lblTerminal.setEnabled(false);
         jPanel2.add(lblTerminal);
@@ -85,7 +106,8 @@ public class Login extends MainUI {
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.ipadx = 98;
         gridBagConstraints.ipady = 17;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        // @edit [May-08-16]
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         jPanel1.add(jPanel2, gridBagConstraints);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -110,16 +132,112 @@ public class Login extends MainUI {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {
+    	if( ( btnLogin.getText() ).equals( "Login" ) ) {
+    		// if the button's text is "Login", do login stuff
+    		// get the ID# from the JTextField txtId
+        	String idNum = txtId.getText().trim();
+        	// check if the string is empty
+        	if( idNum.equals( "" ) ) {
+        		// if empty -> show error
+        		JOptionPane.showMessageDialog( this, "Please indicate your ID number.", "Input Error", JOptionPane.INFORMATION_MESSAGE );
+        	}
+        	else {
+        		HashMap map;
+        		try {
+        			// make HashMap
+        			HashMap<String, Object> mapSend = new HashMap<String, Object>();
+        			
+        			// put the necessary info in the HashMap
+        			mapSend.put( IDNO, idNum );
+        			mapSend.put( TERMINALPK, Integer.toString( PCId ) );
+        			
+        			// @test
+        			//System.out.println( "wtf is happening" );
+        			
+        			// "send" the HashMap
+        			map = doCommand( "/login", mapSend );
+        			String outputText = ( ( String ) map.get( "message" ) );
+        			
+        			// @test
+        			System.out.println( outputText );
+        			
+        			// hard-coded error checking ayyyee
+        			
+        			if( outputText.equals("-1") ) {
+        				// why is it null??
+        				// @test
+        				JOptionPane.showMessageDialog( this, "Student ID# indicated does not exist in the system. Please register first before using the terminal.", "ID Not Found", JOptionPane.ERROR_MESSAGE );
+        			}
+        			//else if( outputText.contains( "Database error Bean object must not be null" ) ) {}
+        			else {
+        				// OK. Now what?
+        				String[] output = outputText.split("/");
+        				JOptionPane.showMessageDialog( this, "Log-in successful.\n" + output[1], "Log-in Success\n" + output[1], JOptionPane.INFORMATION_MESSAGE );
+        				btnLogin.setText( "Logout" );
+        				txtId.setEnabled( false );
+        				accessLog = output[0];
+        				// Kitop says: assume /login works
+        				// it will return a JSON HashMap containing accesslog key and timein
+        				//JsonUtil JSONtransformer = new JsonUtil();
+        				//HashMap<String, Object> neueMap = ( HashMap<String, Object> ) JSONtransformer.fromJsonToObject( outputText, HashMap.class );
+        				// assuming that the key = ACCESSLOGPK
+        				//accessLog = ( String ) neueMap.get( "ACCESSLOGPK" );
+        			}
+        		} catch (NumberFormatException e) {
+        			e.printStackTrace();
+        		} catch (Exception e) { 
+        			e.printStackTrace();
+        		}
+        	}
+    	}
+    	else {
+    		// do logout stuff here
+    		HashMap map;
+    		try {
+    			// make HashMap
+    			HashMap<String, Object> mapSend = new HashMap<String, Object>();
+    			
+    			// put the necessary info in the HashMap
+    			mapSend.put( ACCESSLOGPK, accessLog );
+    			
+    			// "send" the HashMap
+    			map = doCommand( "/logout", mapSend );
+    			String outputText = ( ( String ) map.get( "message" ) );
+    			
+    			// check if logout is successful
+    			if( outputText == null ) {
+    				// idk what to do if result is null
+    				// let's put a message dialog because it looks nice
+    				JOptionPane.showMessageDialog( this, "System encountered unknown error. Please try again.", "Log-out Error", JOptionPane.ERROR_MESSAGE );
+    			}    			
+    			else {
+    				// log out is successful -> congratulate user through message dialog
+    				JOptionPane.showMessageDialog( this, "Log-out successful.\n" + outputText, "Log-out Success\n" + outputText, JOptionPane.INFORMATION_MESSAGE );
+    				// exit because it's over
+    				//System.exit( 0 );
+    			}
+    			btnLogin.setText( "Login" );
+				txtId.setEnabled( true );
+				txtId.setText("");
+    		} catch (NumberFormatException e) {
+    			e.printStackTrace();
+    		} catch (Exception e) { 
+    			e.printStackTrace();
+    		}
+    	}    	
+    }
+    
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                new Login( PCId, terminalNo, roomName ).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnLogin;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -127,7 +245,8 @@ public class Login extends MainUI {
     private javax.swing.JLabel lblRoom;
     private javax.swing.JLabel lblTerminal;
     private javax.swing.JTextField txtId;
+    // @added [May-08-16]
+    private static int PCId, terminalNo;
+    private static String roomName, accessLog;
     // End of variables declaration//GEN-END:variables
-
-    //END OF NETBEANS CODE
 }
