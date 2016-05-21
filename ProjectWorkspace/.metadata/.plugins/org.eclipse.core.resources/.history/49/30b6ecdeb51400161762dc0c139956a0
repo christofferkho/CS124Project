@@ -1,7 +1,0 @@
-package app.receiver.observer;
-
-import java.util.ArrayList;
-
-public interface Observer {
-	public <T> void update(ArrayList<T> result);
-}

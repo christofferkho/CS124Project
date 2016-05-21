@@ -161,22 +161,26 @@ public class Login extends MainUI {
         			
         			// @test
         			System.out.println( outputText );
-        			
         			// hard-coded error checking ayyyee
         			
-        			if( outputText.equals("-1") ) {
+        			if(outputText.trim().equals("-1")) {
         				// why is it null??
         				// @test
         				JOptionPane.showMessageDialog( this, "Student ID# indicated does not exist in the system. Please register first before using the terminal.", "ID Not Found", JOptionPane.ERROR_MESSAGE );
+        				studentInfo = new StudentInfo();
+        				studentInfo.setIPPORT(IPPORT);
+        				studentInfo.setVisible(true);
+        				
         			}
         			//else if( outputText.contains( "Database error Bean object must not be null" ) ) {}
         			else {
         				// OK. Now what?
         				String[] output = outputText.split("/");
+        				txtId.setText("");
         				JOptionPane.showMessageDialog( this, "Log-in successful.\n" + output[1], "Log-in Success\n" + output[1], JOptionPane.INFORMATION_MESSAGE );
-        				btnLogin.setText( "Logout" );
-        				txtId.setEnabled( false );
-        				accessLog = output[0];
+        				//btnLogin.setText( "Logout" );
+        				//txtId.setEnabled( false );
+        				//accessLog = output[0];
         				// Kitop says: assume /login works
         				// it will return a JSON HashMap containing accesslog key and timein
         				//JsonUtil JSONtransformer = new JsonUtil();
@@ -191,41 +195,6 @@ public class Login extends MainUI {
         		}
         	}
     	}
-    	else {
-    		// do logout stuff here
-    		HashMap map;
-    		try {
-    			// make HashMap
-    			HashMap<String, Object> mapSend = new HashMap<String, Object>();
-    			
-    			// put the necessary info in the HashMap
-    			mapSend.put( ACCESSLOGPK, accessLog );
-    			
-    			// "send" the HashMap
-    			map = doCommand( "/logout", mapSend );
-    			String outputText = ( ( String ) map.get( "message" ) );
-    			
-    			// check if logout is successful
-    			if( outputText == null ) {
-    				// idk what to do if result is null
-    				// let's put a message dialog because it looks nice
-    				JOptionPane.showMessageDialog( this, "System encountered unknown error. Please try again.", "Log-out Error", JOptionPane.ERROR_MESSAGE );
-    			}    			
-    			else {
-    				// log out is successful -> congratulate user through message dialog
-    				JOptionPane.showMessageDialog( this, "Log-out successful.\n" + outputText, "Log-out Success\n" + outputText, JOptionPane.INFORMATION_MESSAGE );
-    				// exit because it's over
-    				//System.exit( 0 );
-    			}
-    			btnLogin.setText( "Login" );
-				txtId.setEnabled( true );
-				txtId.setText("");
-    		} catch (NumberFormatException e) {
-    			e.printStackTrace();
-    		} catch (Exception e) { 
-    			e.printStackTrace();
-    		}
-    	}    	
     }
     
     public static void main(String args[]) {
@@ -249,4 +218,6 @@ public class Login extends MainUI {
     private static int PCId, terminalNo;
     private static String roomName, accessLog;
     // End of variables declaration//GEN-END:variables
+    
+    private StudentInfo studentInfo;
 }

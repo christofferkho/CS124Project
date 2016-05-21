@@ -36,7 +36,7 @@ public class CreateTerminal extends MainUI implements Subject {
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Student");
+        jLabel2.setText("Terminal");
         jLabel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
         getContentPane().add(jLabel2, java.awt.BorderLayout.PAGE_START);
 

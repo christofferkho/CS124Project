@@ -6,17 +6,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import app.component.ViewAccessLogsCommand;
+import app.component.ViewTerminalsCommand;
 
 @Component
 public class ViewAccessLogsRequest extends RequestTemplate {
 
-	@Autowired
-	private ViewAccessLogsCommand command;
-	
 	@Override
 	protected String doCommand(HashMap map) {
 		// TODO Auto-generated method stub
-		return command.execute(map);
+		if(ctx != null){
+			command = ctx.getBean(ViewAccessLogsCommand.class);
+			return command.execute(map);
+		}
+		else{
+			return "fail";
+		}
 	}
 
 }

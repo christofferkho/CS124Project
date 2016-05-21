@@ -9,6 +9,9 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.AbstractApplicationContext;
+
 
 import app.component.Command;
 
@@ -35,7 +38,10 @@ public abstract class RequestTemplate {
 	public static final String TIMEIN = "timeIn";
 	public static final String TIMEOUT = "timeOut";
 	
-	//protected Command command;
+	@Autowired
+	protected AbstractApplicationContext ctx;
+	
+	protected Command command;
 	
 	public void attemptRequest(HttpServletRequest request, HttpServletResponse response){
 		HashMap map = convertJsonToCommand(request);

@@ -248,7 +248,8 @@ public class Setup extends MainUI implements Observer {
     			
     			// check if connected
     			if( outputText.equals( "1" ) ) {
-    				CreateTerminal createTerminal = new CreateTerminal();
+    		    	createTerminal = new CreateTerminal();
+    				createTerminal.setIPPORT(IPPORT);
     				createTerminal.setVisible(true);
     				createTerminal.registerObserver(this);
     				getListJson(mapSend);
@@ -293,6 +294,7 @@ public class Setup extends MainUI implements Observer {
         	login.setVisible( true );
         	// make this screen visible
         	this.setVisible( false );
+        	createTerminal.setVisible(false);
     	}
     }
     
@@ -348,7 +350,7 @@ public class Setup extends MainUI implements Observer {
     private javax.swing.table.DefaultTableModel model;
     private final String columnNames[] = { "ID", "Terminal No.", "Room Name" };
     // End of variables declaration //GEN-END:variables
-    
+    CreateTerminal createTerminal;
 	@Override
 	public void update(HashMap result) {
 		// TODO Auto-generated method stub
@@ -359,6 +361,7 @@ public class Setup extends MainUI implements Observer {
 		HashMap map;
 		try {
 			map = doCommand( "/viewTerminals", mapSend );
+			System.out.println(map.get("message"));
 			// get output text in JSON format
 			String outputText = ( String ) map.get( "message" );    				
 			// split the JSON string and store in an array

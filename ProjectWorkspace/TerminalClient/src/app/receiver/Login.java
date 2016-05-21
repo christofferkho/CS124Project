@@ -161,13 +161,16 @@ public class Login extends MainUI {
         			
         			// @test
         			System.out.println( outputText );
-        			
         			// hard-coded error checking ayyyee
         			
-        			if( outputText.equals("-1") ) {
+        			if(outputText.trim().equals("-1")) {
         				// why is it null??
         				// @test
         				JOptionPane.showMessageDialog( this, "Student ID# indicated does not exist in the system. Please register first before using the terminal.", "ID Not Found", JOptionPane.ERROR_MESSAGE );
+        				studentInfo = new StudentInfo();
+        				studentInfo.setIPPORT(IPPORT);
+        				studentInfo.setVisible(true);
+        				
         			}
         			//else if( outputText.contains( "Database error Bean object must not be null" ) ) {}
         			else {
@@ -214,6 +217,7 @@ public class Login extends MainUI {
     			else {
     				// log out is successful -> congratulate user through message dialog
     				JOptionPane.showMessageDialog( this, "Log-out successful.\n" + outputText, "Log-out Success\n" + outputText, JOptionPane.INFORMATION_MESSAGE );
+    				txtId.setText("");
     				// exit because it's over
     				//System.exit( 0 );
     			}
@@ -249,4 +253,6 @@ public class Login extends MainUI {
     private static int PCId, terminalNo;
     private static String roomName, accessLog;
     // End of variables declaration//GEN-END:variables
+    
+    private StudentInfo studentInfo;
 }

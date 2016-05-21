@@ -7,7 +7,6 @@
 <fullyQualifiedTypeName name="javax.persistence.Entity"/>
 <fullyQualifiedTypeName name="app.component.Command"/>
 <fullyQualifiedTypeName name="app.component.CreateStudentCommand"/>
-<fullyQualifiedTypeName name="app.repositories.TerminalRepository"/>
 <fullyQualifiedTypeName name="app.component.CreateTerminalCommand"/>
 <fullyQualifiedTypeName name="org.springframework.stereotype.Repository"/>
 <fullyQualifiedTypeName name="app.repositories.AccessLogRepository"/>
@@ -45,4 +44,7 @@
 <fullyQualifiedTypeName name="com.fasterxml.jackson.databind.ObjectMapper"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="app.receiver.observable.CreateTerminal"/>
+<fullyQualifiedTypeName name="app.repositories.TerminalRepository"/>
+<fullyQualifiedTypeName name="org.springframework.context.ApplicationContext"/>
+<fullyQualifiedTypeName name="org.springframework.context.support.AbstractApplicationContext"/>
 </qualifiedTypeNameHistroy>

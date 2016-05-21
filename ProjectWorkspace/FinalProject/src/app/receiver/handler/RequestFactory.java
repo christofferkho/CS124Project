@@ -6,11 +6,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.stereotype.Component;
+
+import app.component.LogoutCommand;
 
 @Component
 public class RequestFactory {
-	
+	/*
 	@Autowired
 	private CreateStudentRequest createStudentRequest;
 	
@@ -30,15 +33,20 @@ public class RequestFactory {
 	private ViewTerminalsRequest viewTerminalsRequest;
 	
 	@Autowired
-	private ViewAccessLogsRequest viewAccessLogsRequest;
-	//private RequestTemplate requestTemplate;
+	private ViewAccessLogsRequest viewAccessLogsRequest;*/
+	
+	@Autowired
+	private AbstractApplicationContext ctx;
+	
+	private RequestTemplate requestTemplate;
 	
 	public void createRequest(HttpServletRequest request, HttpServletResponse response,
 			String target){
 		if (target.equalsIgnoreCase("/createStudent")) 
 		{
-			//requestTemplate = new CreateStudentRequest();
-			createStudentRequest.attemptRequest(request, response);
+			requestTemplate = ctx.getBean(CreateStudentRequest.class);
+			requestTemplate.attemptRequest(request, response);
+			//createStudentRequest.attemptRequest(request, response);
 		}
 		else if (target.equalsIgnoreCase("/connect")) 
 		{
@@ -51,30 +59,39 @@ public class RequestFactory {
 		} 
 		else if (target.equalsIgnoreCase("/createTerminal")) 
 		{
-			//requestTemplate = new CreateTerminalRequest();
-			createTerminalRequest.attemptRequest(request, response);
+			requestTemplate = ctx.getBean(CreateTerminalRequest.class);
+			requestTemplate.attemptRequest(request, response);
+			//createTerminalRequest.attemptRequest(request, response);
 		} 
 		else if (target.equalsIgnoreCase("/login")) 
 		{
-			//requestTemplate = new LoginRequest();
-			loginRequest.attemptRequest(request, response);
+			requestTemplate = ctx.getBean(LoginRequest.class);
+			requestTemplate.attemptRequest(request, response);
+			//loginRequest.attemptRequest(request, response);
 		} 
 		else if (target.equalsIgnoreCase("/logout")) 
 		{
-			//requestTemplate = new LogoutRequest();
-			logoutRequest.attemptRequest(request, response);
+			requestTemplate = ctx.getBean(LogoutRequest.class);
+			requestTemplate.attemptRequest(request, response);
+			//logoutRequest.attemptRequest(request, response);
 		} 
 		else if (target.equalsIgnoreCase("/getPromoURL")) 
 		{
-			getPromoRequest.attemptRequest(request, response);
+			requestTemplate = ctx.getBean(GetPromoRequest.class);
+			requestTemplate.attemptRequest(request, response);
+			//getPromoRequest.attemptRequest(request, response);
 		} 
 		else if (target.equalsIgnoreCase("/viewTerminals")) 
 		{
-			viewTerminalsRequest.attemptRequest(request, response);
+			requestTemplate = ctx.getBean(ViewTerminalsRequest.class);
+			requestTemplate.attemptRequest(request, response);
+			//viewTerminalsRequest.attemptRequest(request, response);
 		} 
 		else if (target.equalsIgnoreCase("/viewAccessLogs")) 
 		{
-			viewAccessLogsRequest.attemptRequest(request, response);
+			requestTemplate = ctx.getBean(ViewAccessLogsRequest.class);
+			requestTemplate.attemptRequest(request, response);
+			//viewAccessLogsRequest.attemptRequest(request, response);
 		} 
 		else {
 			// invalid request

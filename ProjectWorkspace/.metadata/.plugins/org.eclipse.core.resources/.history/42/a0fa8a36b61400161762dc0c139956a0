@@ -1,9 +1,0 @@
-package app.receiver.observable;
-
-import app.receiver.observer.Observer;
-
-public interface Subject {
-	public void registerObserver(Observer observer);
-	public void notifyObservers();
-	public void removeObserver(Observer observer);
-}

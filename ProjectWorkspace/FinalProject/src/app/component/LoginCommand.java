@@ -5,6 +5,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,13 +13,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import app.entity.AccessLog;
 import app.entity.Student;
 import app.entity.Terminal;
+import app.repositories.TerminalRepository;
 
 @Component
 public class LoginCommand extends Command {
 	
 	private AccessLog login;
-
-	//private ObjectMapper om = new ObjectMapper();
 	
 	@Override
 	public String undo(Exception e) {

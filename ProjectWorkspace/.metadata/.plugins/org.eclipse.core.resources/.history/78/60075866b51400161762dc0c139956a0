@@ -1,5 +1,0 @@
-package app.receiver.observable;
-
-public class AccessLogListener implements Subject {
-
-}

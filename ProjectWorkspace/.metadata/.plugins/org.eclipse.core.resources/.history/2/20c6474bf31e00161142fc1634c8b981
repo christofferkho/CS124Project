@@ -1,0 +1,49 @@
+package app.component;
+
+import java.util.HashMap;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import app.entity.Terminal;
+import app.repositories.TerminalRepository;
+
+@Component
+public class ViewTerminalsCommand extends Command{
+	
+	private ObjectMapper om = new ObjectMapper();
+	
+	private ApplicationContext ctx = new ClassPathXmlApplicationContext(new String []{"applicationContext.xml"});
+	//@Autowired
+	//protected TerminalRepository terminalDao;
+	private TerminalRepository terminalDao = ctx.getBean(TerminalRepository.class);
+	
+	@Override
+	public String undo(Exception e) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String execute(HashMap map) {
+		// TODO Auto-generated method stub
+		List<Terminal> terminals = getTerminals();
+		try {
+			return om.writeValueAsString(terminals);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			return "Database Error " + e.toString();
+		}
+	}
+	
+	private List<Terminal> getTerminals(){
+		return terminalDao.findAll();
+	}
+
+}

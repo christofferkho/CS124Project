@@ -24,6 +24,7 @@ public class ViewLogs extends MainUI implements Observer {
     public ViewLogs() {
         initComponents();
         listener = new AccessLogListener();
+        listener.setIPPORT(IPPORT);
         listener.registerObserver(this);
         listener.run();
     }
@@ -172,7 +173,7 @@ public class ViewLogs extends MainUI implements Observer {
     private javax.swing.JTextField txtIdSearch;
     // End of variables declaration//GEN-END:variables
     
-    private Subject listener;
+    private AccessLogListener listener;
     private ArrayList<AccessLog> accessLogs = new ArrayList<AccessLog>();
     private ObjectMapper om = new ObjectMapper();
     
